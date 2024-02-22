@@ -63,24 +63,34 @@ const Login = () => {
       <div className="login container">
         <div className="login form">
           <FormField
-            label="Username"
-            value={username}
-            onChange={(un: string) => setUsername(un)}
+              label="Username"
+              value={username}
+              onChange={(un: string) => setUsername(un)}
           />
           <FormField
-            label="Name"
-            value={name}
-            onChange={(n) => setName(n)}
+              label="Name"
+              value={name}
+              onChange={(n) => setName(n)}
           />
           <div className="login button-container">
             <Button
-              disabled={!username || !name}
-              width="100%"
-              onClick={() => doLogin()}
+                disabled={!username || !name}
+                width="100%"
+                onClick={() => doLogin()}
             >
               Login
             </Button>
           </div>
+
+          <div className="register button-container">
+            <Button
+                width="100%"
+                onClick={() => navigate("/register")}
+            >
+              Register
+            </Button>
+          </div>
+
         </div>
       </div>
     </BaseContainer>
