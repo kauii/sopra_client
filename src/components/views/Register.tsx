@@ -33,7 +33,7 @@ FormField.propTypes = {
     onChange: PropTypes.func,
 };
 
-const Login = () => {
+const Register = () => {
     const navigate = useNavigate();
     const [name, setName] = useState<string>(null);
     const [username, setUsername] = useState<string>(null);
@@ -78,9 +78,19 @@ const Login = () => {
                             width="100%"
                             onClick={() => doLogin()}
                         >
-                            Login
+                            Register
                         </Button>
                     </div>
+
+                    <div className="register button-container">
+                        <Button
+                            width="100%"
+                            onClick={() => navigate("/login")}
+                        >
+                            Go back to Login
+                        </Button>
+                    </div>
+
                 </div>
             </div>
         </BaseContainer>
@@ -90,4 +100,4 @@ const Login = () => {
 /**
  * You can get access to the history object's properties via the useLocation, useNavigate, useParams, ... hooks.
  */
-export default Login;
+export default Register;
