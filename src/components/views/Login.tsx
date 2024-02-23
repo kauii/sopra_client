@@ -57,7 +57,7 @@ const Login = () => {
       // Handle different types of errors
       if (error.response && error.response.status === 401) {
         // Unauthorized (login failed)
-        alert('Login failed. Please check your username and password.');
+        alert("Login failed. Please check your username and password.");
       } else { alert(`Something went wrong during the login: \n${handleError(error)}`); }
     }
   };
