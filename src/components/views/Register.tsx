@@ -3,7 +3,7 @@ import { api, handleError } from "helpers/api";
 import User from "models/User";
 import {useNavigate} from "react-router-dom";
 import { Button } from "components/ui/Button";
-import "styles/views/Login.scss";
+import "styles/views/Register.scss";
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
 
@@ -14,12 +14,19 @@ As a rule of thumb, use one file per component and only add small,
 specific components that belong to the main one in the same file.
  */
 const FormField = (props) => {
+    const [showPassword, setShowPassword] = useState(false);
+
+    const handleTogglePassword = () => {
+        setShowPassword(!showPassword);
+    }
+
     return (
-        <div className="login field">
-            <label className="login label">{props.label}</label>
+        <div className="register field">
+            <label className="register label">{props.label}</label>
             <input
-                className="login input"
+                className="register input"
                 placeholder="enter here.."
+                type={props.type}
                 value={props.value}
                 onChange={(e) => props.onChange(e.target.value)}
             />
@@ -31,16 +38,18 @@ FormField.propTypes = {
     label: PropTypes.string,
     value: PropTypes.string,
     onChange: PropTypes.func,
+    type: PropTypes.string,
 };
 
 const Register = () => {
     const navigate = useNavigate();
     const [username, setUsername] = useState<string>(null);
     const [name, setName] = useState<string>(null);
+    const[password, setPassword] = useState<string>(null);
 
-    const doLogin = async () => {
+    const doRegister = async () => {
         try {
-            const requestBody = JSON.stringify({ username, name });
+            const requestBody = JSON.stringify({ username, name, password });
             const response = await api.post("/users", requestBody);
 
             // Get the returned user and update a new object.
@@ -52,16 +61,21 @@ const Register = () => {
             // Login successfully worked --> navigate to the route /game in the GameRouter
             navigate("/game");
         } catch (error) {
-            alert(
-                `Something went wrong during the login: \n${handleError(error)}`
-            );
+            // Handle different types of errors
+            if (error.response && error.response.status === 400) {
+                // Bad request (username already taken)
+                alert('Username is already taken. Please choose a different one.');
+            } else {
+                // Other errors
+                alert(`Something went wrong during the register: \n${handleError(error)}`);
+            }
         }
     };
 
     return (
         <BaseContainer>
-            <div className="login container">
-                <div className="login form">
+            <div className="register container">
+                <div className="register form">
                     <FormField
                         label="Username"
                         value={username}
@@ -72,11 +86,17 @@ const Register = () => {
                         value={name}
                         onChange={(n) => setName(n)}
                     />
-                    <div className="login button-container">
+                    <FormField
+                        label="Password"
+                        type="password"
+                        value={password}
+                        onChange={(pw: string) => setPassword(pw)}
+                    />
+                    <div className="register button-container">
                         <Button
                             disabled={!username || !name}
                             width="100%"
-                            onClick={() => doLogin()}
+                            onClick={() => doRegister()}
                         >
                             Register
                         </Button>

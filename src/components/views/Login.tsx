@@ -20,6 +20,7 @@ const FormField = (props) => {
       <input
         className="login input"
         placeholder="enter here.."
+        type={props.type}
         value={props.value}
         onChange={(e) => props.onChange(e.target.value)}
       />
@@ -31,16 +32,17 @@ FormField.propTypes = {
   label: PropTypes.string,
   value: PropTypes.string,
   onChange: PropTypes.func,
+  type: PropTypes.string,
 };
 
 const Login = () => {
   const navigate = useNavigate();
-  const [name, setName] = useState<string>(null);
   const [username, setUsername] = useState<string>(null);
+  const [password, setPassword] = useState<string>(null);
 
   const doLogin = async () => {
     try {
-      const requestBody = JSON.stringify({ username, name });
+      const requestBody = JSON.stringify({ username, password });
       const response = await api.post("/login", requestBody);
 
       // Get the returned user and update a new object.
@@ -52,9 +54,11 @@ const Login = () => {
       // Login successfully worked --> navigate to the route /game in the GameRouter
       navigate("/game");
     } catch (error) {
-      alert(
-        `Something went wrong during the login: \n${handleError(error)}`
-      );
+      // Handle different types of errors
+      if (error.response && error.response.status === 401) {
+        // Unauthorized (login failed)
+        alert('Login failed. Please check your username and password.');
+      } else { alert(`Something went wrong during the login: \n${handleError(error)}`); }
     }
   };
 
@@ -68,13 +72,14 @@ const Login = () => {
             onChange={(un: string) => setUsername(un)}
           />
           <FormField
-            label="Name"
-            value={name}
-            onChange={(n) => setName(n)}
+            label="Password"
+            type={"password"}
+            value={password}
+            onChange={(pw) => setPassword(pw)}
           />
           <div className="login button-container">
             <Button
-              disabled={!username || !name}
+              disabled={!username || !password}
               width="100%"
               onClick={() => doLogin()}
             >
