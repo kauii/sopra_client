@@ -94,7 +94,7 @@ const Register = () => {
           />
           <div className="register button-container">
             <Button
-              disabled={!username || !name}
+              disabled={!username || !name || !password}
               width="100%"
               onClick={() => doRegister()}
             >
