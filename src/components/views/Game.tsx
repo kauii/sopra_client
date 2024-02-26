@@ -8,9 +8,11 @@ import PropTypes from "prop-types";
 import "styles/views/Game.scss";
 import { User } from "types";
 
-const Player = ({ user }: { user: User }) => (
+const Player = ({ user, onUsernameClick }: { user: User; onUsernameClick: (id: number) => void }) => (
   <div className="player container">
-    <div className="player username">{user.username}</div>
+    <div className="player username" onClick={() => onUsernameClick(user.id)}>
+      {user.username}
+    </div>
     <div className="player name">{user.name}</div>
     <div className="player id">id: {user.id}</div>
   </div>
@@ -18,11 +20,16 @@ const Player = ({ user }: { user: User }) => (
 
 Player.propTypes = {
   user: PropTypes.object,
+  onUsernameClick: PropTypes.func,
 };
 
 const Game = () => {
   // use react-router-dom's hook to access navigation, more info: https://reactrouter.com/en/main/hooks/use-navigate 
   const navigate = useNavigate();
+
+  const handleUsernameClick = (id: number) => {
+    navigate(`/users/${id}`);
+  };
 
   // define a state variable (using the state hook).
   // if this variable changes, the component will re-render, but the variable will
@@ -87,7 +94,7 @@ const Game = () => {
         <ul className="game user-list">
           {users.map((user: User) => (
             <li key={user.id}>
-              <Player user={user} />
+              <Player user={user} onUsernameClick={handleUsernameClick} />
             </li>
           ))}
         </ul>

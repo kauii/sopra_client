@@ -9,6 +9,7 @@
 
 .game {
   &.container {
+    width: fit-content;
     background: $background;
     padding: 1.5em;
     border-radius: $borderRadius;
@@ -42,11 +43,21 @@
     align-items: center;
     background: lighten($background, 5);
   }
+  &.profile {
+    margin: 0.5em 0;
+    width: 20em;
+    padding: 10px;
+    border-radius: $borderRadius;
+    display: block;
+    align-items: center;
+    background: lighten($background, 5);
+  }
   &.name {
     font-weight: 300;
     margin-left: 5px;
   }
   &.username {
+    cursor: pointer;
     font-weight: 500;
     color: $accent;
   }

@@ -52,7 +52,7 @@ const Login = () => {
       localStorage.setItem("token", user.token);
 
       // Login successfully worked --> navigate to the route /game in the GameRouter
-      navigate("/game");
+      navigate("/overview");
     } catch (error) {
       // Handle different types of errors
       if (error.response && error.response.status === 401) {
