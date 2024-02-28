@@ -8,11 +8,13 @@ import { User } from "types";
 import {Button} from "../ui/Button";
 
 const UserProfile = () => {
+	console.log(localStorage.getItem("token"))
 	const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [username, setUsername] = useState<string | null>(null);
+	const [token, setToken] = useState<string | null>(null);
   let display;
 
 
@@ -50,6 +52,9 @@ const UserProfile = () => {
 		      <div>
 			      <span style={{color: "#96a7ff"}}>Creation Date:</span> {user.creationDate}
 		      </div>
+		      <div>
+			      <span style={{color: "#96a7ff"}}>Birth Date:</span> {user.birthDate}
+		      </div>
 	      </ul>
 
       );
@@ -62,8 +67,21 @@ const UserProfile = () => {
 
 	return (
 		<BaseContainer className="game container">
-			<h2>Profile of {display}</h2>
+			{user && user.token === localStorage.getItem("token") ? (
+				<h2>My Profile</h2>
+			) : (
+				<h2>Profile of {display}</h2>
+			)}
 			{content}
+			{user && user.token === localStorage.getItem("token") && (
+				<Button
+					width="100%"
+					onClick={() => navigate(`/users/${user.id}/edit-profile`)} // Update with your edit profile route
+					style={{ marginTop: "20px" }}
+				>
+					Edit Profile
+				</Button>
+			)}
 	    <Button
 		    width="100%"
 		    onClick={() => navigate("/overview")}

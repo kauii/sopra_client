@@ -49,6 +49,9 @@ const Login = () => {
       const user = new User(response.data);
 
       // Store the token into the local storage.
+
+	    console.log(user.data)
+
       localStorage.setItem("token", user.token);
 
       // Login successfully worked --> navigate to the route /game in the GameRouter

@@ -9,6 +9,7 @@ import AppRouter from "./components/routing/routers/AppRouter";
  * Updated by Marco Leder
  */
 const App = () => {
+	localStorage.clear()
   return (
     <div>
       <Header height="100" />
