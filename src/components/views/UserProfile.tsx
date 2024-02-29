@@ -36,6 +36,14 @@ const UserProfile = () => {
     fetchUsers();
   }, []);
 
+	const getStatusColor = () => {
+		if (user.status === 'ONLINE') {
+			return { color: '#63b063' };
+		} else {
+			return {}; // No additional styles for other statuses
+		}
+	};
+
   let content = <Spinner />;
 
   if (!loading) {
@@ -44,16 +52,17 @@ const UserProfile = () => {
       content = (
 	      <ul className="player profile">
 		      <div>
-			      <span style={{color: "#96a7ff"}}>Username:</span> {user.username}
+			      <span style={{color: "black"}}>Username:</span> {user.username}
 		      </div>
 		      <div>
-			      <span style={{color: "#96a7ff"}}>Status:</span> {user.status}
+			      <span style={{color: "black"}}>Status: </span>
+			      <span style={getStatusColor()}>{user.status}</span>
 		      </div>
 		      <div>
-			      <span style={{color: "#96a7ff"}}>Creation Date:</span> {user.creationDate}
+			      <span style={{color: "black"}}>Creation Date:</span> {user.creationDate}
 		      </div>
 		      <div>
-			      <span style={{color: "#96a7ff"}}>Birth Date:</span> {user.birthDate}
+			      <span style={{color: "black"}}>Birth Date:</span> {user.birthDate}
 		      </div>
 	      </ul>
 
@@ -82,7 +91,7 @@ const UserProfile = () => {
 					Edit Profile
 				</Button>
 			)}
-	    <Button
+	    <Button className="secondary-button"
 		    width="100%"
 		    onClick={() => navigate("/overview")}
 		    style={{ marginTop: "20px" }}

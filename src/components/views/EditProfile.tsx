@@ -37,7 +37,7 @@ const EditProfile = () => {
 		try {
 			// Make API request to update user profile
 			const requestBody = JSON.stringify({ username, birthDate });
-			const response = await api.put(`/users/${id}`, requestBody);
+			const response = await api.post(`/users/${id}`, requestBody);
 
 			navigate(`/users/${id}`);
 
@@ -55,39 +55,46 @@ const EditProfile = () => {
 	let content = <Spinner />;
 
 	return (
-		<BaseContainer className="edit-profile container">
+		<BaseContainer className="game container">
 			<h2>Edit Profile</h2>
+
 			<form>
-				<label htmlFor="username">Username:</label>
-				<input
-					type="text"
-					id="username"
-					value={username}
-					onChange={handleUsernameChange}
-				/>
+				<ul className="player profile">
+					<label htmlFor="username">Username:</label>
+					<input
+						type="text"
+						id="username"
+						value={username}
+						onChange={handleUsernameChange}
+					/>
 
-				<label htmlFor="birthdate">Birthdate:</label>
-				<input
-					type="date"
-					id="birthdate"
-					value={birthDate}
-					onChange={handleBirthdateChange}
-				/>
+					<label htmlFor="birthdate">Birthdate:</label>
+					<input
+						style={{marginTop: "10px"}}
+						type="date"
+						id="birthdate"
+						value={birthDate}
+						onChange={handleBirthdateChange}
+					/>
+				</ul>
 
-				<Button
-					disabled={!isFormValid}
-					width="100%"
-					onClick={handleSubmit}
-					style={{ marginTop: "20px" }}
-				>
-					Save Changes
-				</Button>
-				<Button width="100%" onClick={handleCancel}>
-					Cancel
-				</Button>
+					<Button
+						disabled={!isFormValid}
+						width="100%"
+						onClick={handleSubmit}
+						style={{marginTop: "20px"}}
+					>
+						Save Changes
+					</Button>
+					<Button className="secondary-button"
+						width="100%" onClick={handleCancel}
+						style={{marginTop: "20px"}}
+					>
+						Cancel
+					</Button>
 			</form>
 		</BaseContainer>
-	);
+);
 };
 
 export default EditProfile;

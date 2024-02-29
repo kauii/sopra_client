@@ -105,7 +105,7 @@ const Register = () => {
           </div>
 
           <div className="register button-container">
-            <Button
+            <Button className="secondary-button"
               width="100%"
               onClick={() => navigate("/login")}
             >

@@ -42,7 +42,7 @@
     border-radius: $borderRadius;
     display: flex;
     align-items: center;
-    background: lighten($background, 5);
+    background: lighten($background, 10);
   }
   &.profile {
     margin: 0.5em 0;
@@ -51,7 +51,7 @@
     border-radius: $borderRadius;
     display: block;
     align-items: center;
-    background: lighten($background, 5);
+    background: lighten($background, 10);
   }
   &.name {
     font-weight: 300;
@@ -63,7 +63,7 @@
     color: $accent;
 
     &:hover {
-      color: #bfc9ff;
+      color: #adadad;
     }
   }
   &.id {

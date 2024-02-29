@@ -112,7 +112,8 @@ const Game = () => {
             </li>
           ))}
         </ul>
-        <Button width="100%" onClick={() => logout()}>
+        <Button className="secondary-button"
+	        width="100%" onClick={() => logout()}>
           Logout
         </Button>
       </div>
