@@ -9,24 +9,24 @@ import { User } from "types";
 import {Button} from "../ui/Button";
 
 const EditProfile = () => {
-	console.log(localStorage.getItem("token"))
-	const navigate = useNavigate();
-	const [user, setUser] = useState<User | null>(null);
-	const { id } = useParams<{ id: string }>();
-	const [loading, setLoading] = useState<boolean>(true);
-	const [username, setUsername] = useState<string>('');
-	const [birthDate, setBirthdate] = useState<string>('');
-	const [isFormValid, setIsFormValid] = useState<boolean>(false);
+	 console.log(localStorage.getItem("token"))
+	 const navigate = useNavigate();
+	 const [user, setUser] = useState<User | null>(null);
+	 const { id } = useParams<{ id: string }>();
+	 const [loading, setLoading] = useState<boolean>(true);
+	 const [username, setUsername] = useState<string>('');
+	 const [birthDate, setBirthdate] = useState<string>('');
+	 const [isFormValid, setIsFormValid] = useState<boolean>(false);
 
-	useEffect(() => {
-		// Check if both username and birthdate are not empty
-		const isValid = username.trim() !== '' || birthDate.trim() !== '';
-		setIsFormValid(isValid);
-	}, [username, birthDate]);
+	 useEffect(() => {
+		 // Check if both username and birthdate are not empty
+		  const isValid = username.trim() !== "" || birthDate.trim() !== "";
+		  setIsFormValid(isValid);
+	 }, [username, birthDate]);
 
-	const handleUsernameChange = (event) => {
-		setUsername(event.target.value)
-	};
+	 const handleUsernameChange = (event) => {
+	  	setUsername(event.target.value)
+ 	};
 
 	const handleBirthdateChange = (event) => {
 		setBirthdate(event.target.value);
@@ -37,7 +37,7 @@ const EditProfile = () => {
 		try {
 			// Make API request to update user profile
 			const requestBody = JSON.stringify({ username, birthDate });
-			const response = await api.post(`/users/${id}`, requestBody);
+			await api.put(`/users/${id}`, requestBody);
 
 			navigate(`/users/${id}`);
 

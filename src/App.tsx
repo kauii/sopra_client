@@ -1,15 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "./components/views/Header";
 import AppRouter from "./components/routing/routers/AppRouter";
 
-/**
- * Happy coding!
- * React Template by Lucas Pelloni
- * Overhauled by Kyrill Hux
- * Updated by Marco Leder
- */
 const App = () => {
-	localStorage.clear()
+  useEffect(() => {
+    // Check for the token on page load
+    const token = localStorage.getItem("token");
+    // You may want to implement further logic based on the token, e.g., user authentication
+    console.log("Token on page load:", token);
+  }, []);
+
   return (
     <div>
       <Header height="100" />

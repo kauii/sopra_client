@@ -19,21 +19,21 @@ const UserProfile = () => {
 
 
   useEffect(() => {
-    async function fetchUsers() {
+    async function fetchUser() {
       try {
         setLoading(true);
-        const response = await api.get("/users");
-        const users: User[] = response.data;
-        const foundUser = users.find(user => user.id === parseInt(id, 10));
-        setUser(foundUser);
-        setUsername(foundUser ? foundUser.username : null)
+        // id = parseInt(id, 10)
+        const response = await api.get(`/users/${id}`);
+        console.log(response.data)
+        setUser(response.data);
+        //setUsername(foundUser ? foundUser.username : null)
       } catch (error) {
         alert(`An error occurred while fetching the users: ${handleError(error)}`);
       } finally {
         setLoading(false);
       }
     }
-    fetchUsers();
+    fetchUser();
   }, []);
 
 	const getStatusColor = () => {
@@ -48,7 +48,7 @@ const UserProfile = () => {
 
   if (!loading) {
     if (user) {
-      display = username
+      display = user.username
       content = (
 	      <ul className="player profile">
 		      <div>

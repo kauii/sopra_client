@@ -52,7 +52,9 @@ const Login = () => {
 
 	    console.log(user.data)
 
-      localStorage.setItem("token", user.token);
+      localStorage.setItem("token", user.token)
+      localStorage.setItem("id", user.id)
+      console.log(localStorage.getItem("token"))
 
       // Login successfully worked --> navigate to the route /game in the GameRouter
       navigate("/overview");

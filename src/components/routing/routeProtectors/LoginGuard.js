@@ -9,11 +9,12 @@ import PropTypes from "prop-types";
  */
 export const LoginGuard = () => {
   if (!localStorage.getItem("token")) {
+    console.log(localStorage.getItem("token"))
     
     return <Outlet />;
   }
   
-  return <Navigate to="/login" replace />;
+  return <Navigate to="/overview" replace />;
 };
 
 LoginGuard.propTypes = {

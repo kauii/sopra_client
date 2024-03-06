@@ -3,7 +3,8 @@ export type User = {
   name: string;
   id: number;
 	token: string
-	creationDate: string;
-	birthDate: string;
+	creationDate: Date;
+	birthDate: Date;
 	status: string;
+
 };

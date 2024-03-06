@@ -7,6 +7,7 @@ import Login from "../../views/Login";
 import Register from "../../views/Register";
 import UserProfile from "../../views/UserProfile";
 import EditProfile from "../../views/EditProfile";
+import { AuthGuard } from "../routeProtectors/AuthGuard";
 
 /**
  * Main router of your application.
@@ -34,9 +35,13 @@ const AppRouter = () => {
           <Route path="/register" element={<Register />} />
         </Route>
 
-        <Route path="/users/:id" element={<UserProfile />} />
+        <Route path="/users/:id" element={<GameGuard />}>
+          <Route path="/users/:id" element={<UserProfile />} />
+        </Route>
 
-        <Route path="/users/:id/edit-profile" element={<EditProfile />} />
+        <Route path="/users/:id/edit-profile" element={<AuthGuard />}>
+          <Route path="/users/:id/edit-profile" element={<EditProfile />} />
+        </Route>
 
         <Route path="/" element={
           <Navigate to="/overview" replace />
