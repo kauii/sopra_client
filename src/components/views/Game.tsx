@@ -40,20 +40,20 @@ const Game = () => {
 
   const logout = async (): Promise<void> => {
     try {
-			// Find user matching to local stored token
-			const currentUser = users.find(user => user.token === localStorage.getItem("token"))
+      // Find user matching to local stored token
+      const currentUser = users.find(user => user.token === localStorage.getItem("token"))
 
-			// Send a request to update user status to "offline"
+      // Send a request to update user status to "offline"
       await api.post(`/users/${currentUser.id}/logout`);
-			// Perform other logout actions
+      // Perform other logout actions
       localStorage.removeItem("token");
-      navigate('/login');
-		} catch (error) {
+      navigate("/login");
+    } catch (error) {
       localStorage.removeItem("token");
-      console.error('Error during logout:', error);
-      navigate('/login')
-		}
-	};
+      console.error("Error during logout:", error);
+      navigate("/login")
+    }
+  };
 
   // the effect hook can be used to react to change in your component.
   // in this case, the effect hook is only run once, the first time the component is mounted
