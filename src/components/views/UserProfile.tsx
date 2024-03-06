@@ -8,8 +8,8 @@ import { User } from "types";
 import {Button} from "../ui/Button";
 
 const UserProfile = () => {
-	console.log(localStorage.getItem("token"))
-	const navigate = useNavigate();
+  console.log(localStorage.getItem("token"))
+  const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -34,13 +34,13 @@ const UserProfile = () => {
     fetchUser();
   }, []);
 
-	const getStatusColor = () => {
-		if (user.status === 'ONLINE') {
-			return { color: '#63b063' };
-		} else {
-			return {}; // No additional styles for other statuses
-		}
-	};
+  const getStatusColor = () => {
+    if (user.status === "ONLINE") {
+      return { color: "#63b063" };
+    } else {
+      return {}; // No additional styles for other statuses
+    }
+  };
 
   let content = <Spinner />;
 
@@ -72,23 +72,23 @@ const UserProfile = () => {
     }
   }
 
-	return (
-		<BaseContainer className="game container">
-			{user && user.token === localStorage.getItem("token") ? (
-				<h2>My Profile</h2>
-			) : (
-				<h2>Profile of {display}</h2>
-			)}
-			{content}
-			{user && user.token === localStorage.getItem("token") && (
-				<Button
-					width="100%"
-					onClick={() => navigate(`/users/${user.id}/edit-profile`)} // Update with your edit profile route
-					style={{ marginTop: "20px" }}
-				>
+  return (
+    <BaseContainer className="game container">
+      {user && user.token === localStorage.getItem("token") ? (
+        <h2>My Profile</h2>
+      ) : (
+        <h2>Profile of {display}</h2>
+      )}
+      {content}
+      {user && user.token === localStorage.getItem("token") && (
+        <Button
+          width="100%"
+          onClick={() => navigate(`/users/${user.id}/edit-profile`)} // Update with your edit profile route
+          style={{ marginTop: "20px" }}
+        >
 					Edit Profile
-				</Button>
-			)}
+        </Button>
+      )}
 	    <Button className="secondary-button"
 		    width="100%"
 		    onClick={() => navigate("/overview")}

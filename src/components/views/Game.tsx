@@ -9,17 +9,17 @@ import "styles/views/Game.scss";
 import { User } from "types";
 
 const Player = ({ user, onUsernameClick }: { user: User; onUsernameClick: (id: number) => void }) => (
-	<div className="player container">
-		<div className="player username" onClick={() => onUsernameClick(user.id)}>
-			{user.username}
-		</div>
-		<div className="player name">{user.name}</div>
-		<div className="player id">id: {user.id}</div>
-	</div>
+  <div className="player container">
+    <div className="player username" onClick={() => onUsernameClick(user.id)}>
+      {user.username}
+    </div>
+    <div className="player name">{user.name}</div>
+    <div className="player id">id: {user.id}</div>
+  </div>
 );
 
 Player.propTypes = {
-	user: PropTypes.object,
+  user: PropTypes.object,
   onUsernameClick: PropTypes.func,
 };
 
@@ -38,22 +38,20 @@ const Game = () => {
   // more information can be found under https://react.dev/learn/state-a-components-memory and https://react.dev/reference/react/useState 
   const [users, setUsers] = useState<User[]>(null);
 
-	const logout = async (): Promise<void> => {
-		try {
-
+  const logout = async (): Promise<void> => {
+    try {
+			// Find user matching to local stored token
 			const currentUser = users.find(user => user.token === localStorage.getItem("token"))
 
-
 			// Send a request to update user status to "offline"
-			await api.post(`/users/${currentUser.id}/logout`);
-
+      await api.post(`/users/${currentUser.id}/logout`);
 			// Perform other logout actions
-			localStorage.removeItem('token');
-			navigate('/login');
+      localStorage.removeItem("token");
+      navigate('/login');
 		} catch (error) {
-			localStorage.removeItem('token');
-			console.error('Error during logout:', error);
-			navigate('/login')
+      localStorage.removeItem("token");
+      console.error('Error during logout:', error);
+      navigate('/login')
 		}
 	};
 

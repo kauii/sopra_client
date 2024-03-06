@@ -52,7 +52,7 @@ const Register = () => {
 
 
       console.log("status code:", response.status)
-			console.log(user.username + " " + user.token)
+      console.log(user.username + " " + user.token)
 
       // Store the token into the local storage.
       localStorage.setItem("token", user.token)
