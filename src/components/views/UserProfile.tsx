@@ -13,8 +13,6 @@ const UserProfile = () => {
   const { id } = useParams<{ id: string }>();
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const [username, setUsername] = useState<string | null>(null);
-	const [token, setToken] = useState<string | null>(null);
   let display;
 
 

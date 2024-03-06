@@ -14,11 +14,6 @@ As a rule of thumb, use one file per component and only add small,
 specific components that belong to the main one in the same file.
  */
 const FormField = (props) => {
-  const [showPassword, setShowPassword] = useState(false);
-
-  const handleTogglePassword = () => {
-    setShowPassword(!showPassword);
-  }
 
   return (
     <div className="register field">
@@ -67,6 +62,10 @@ const Register = () => {
       navigate("/overview");
     } catch (error) {
       // Handle different types of errors
+	    console.log("request to:", error.response.request.responseURL);
+	    console.log("status code:", error.response.status);
+	    console.log("status text:", error.response.statusText);
+	    console.log("requested data:", error.response.data);
       if (error.response && error.response.status === 400) {
         // Bad request (username already taken)
         alert("Username is already taken. Please choose a different one.");
