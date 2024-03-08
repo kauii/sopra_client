@@ -39,17 +39,15 @@ const Game = () => {
   const [users, setUsers] = useState<User[]>(null);
 
   const logout = async (): Promise<void> => {
+	  localStorage.removeItem("token");
     try {
-      // Find user matching to local stored token
-      const currentUser = users.find(user => user.token === localStorage.getItem("token"))
 
       // Send a request to update user status to "offline"
-      await api.post(`/users/${currentUser.id}/logout`);
-      // Perform other logout actions
-      localStorage.removeItem("token");
+      await api.post(`/users/${localStorage.getItem("id")}/logout`);
+
       navigate("/login");
     } catch (error) {
-      localStorage.removeItem("token");
+
       console.error("Error during logout:", error);
       navigate("/login")
     }

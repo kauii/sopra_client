@@ -13,7 +13,7 @@ const UserProfile = () => {
   const { id } = useParams<{ id: string }>();
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  let display;
+  let display: string;
 
 
   useEffect(() => {
